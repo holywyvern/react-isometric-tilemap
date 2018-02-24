@@ -1,5 +1,7 @@
 import React from "react";
 
-const App = () => <div />;
+import { IsometricTileset } from "../lib";
+
+const App = () => <IsometricTileset />;
 
 export default App;

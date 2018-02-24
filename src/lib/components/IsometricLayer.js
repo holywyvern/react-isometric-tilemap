@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "./IsometricLayer.scss";
+
 class IsometricLayer extends Component {
   static propTypes = {
     type: PropTypes.string,

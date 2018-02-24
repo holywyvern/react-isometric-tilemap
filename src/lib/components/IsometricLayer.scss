@@ -1,0 +1,11 @@
+.isometric-tileset-layer {
+    width:  calc( var(--p-size-unit) * var(--p-container-width)  );
+    height: calc( var(--p-size-unit) * var(--p-container-height) );
+    transform: 
+        rotateZ(60deg) 
+        translateX( calc( var(--p-size-unit) * var(--p-center-x) ) )
+        translateY( calc( var(--p-size-unit) * var(--p-center-y) / 2 ) )
+    ;
+    transform-origin: center center;
+    background: red;
+}
