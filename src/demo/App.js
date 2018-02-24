@@ -1,12 +1,5 @@
-import React from 'react';
-import Example from '../lib';
-import { SecondExample } from '../lib';
+import React from "react";
 
-const App = () => (
-  <div>
-    <Example />
-    <SecondExample />
-  </div>
-);
+const App = () => <div />;
 
 export default App;
