@@ -1,7 +1,7 @@
 {
-  "name": "create-react-library",
+  "name": "react-isometric-tilemap",
   "version": "1.1.0",
-  "description": "React NPM library starter kit based on Facebook's create react app",
+  "description": "A Tileset for isomtric game components made only with the DOM",
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DimitriMikadze/create-react-library.git"
+    "url": "git+https://github.com/holywyvern/react-isometric-tilemap.git"
   },
-  "author": "Dimitri Mikadze <dimitrimikadze@gmail.com>",
+  "author": "Ramiro Rojo <ramiro.rojo.cretta@gmail.com>",
   "bugs": {
-    "url": "https://github.com/DimitriMikadze/create-react-library/issues"
+    "url": "https://github.com/holywyvern/react-isometric-tilemap/issues"
   },
-  "homepage": "https://github.com/DimitriMikadze/create-react-library#readme",
-  "license": "MIT",
+  "homepage": "https://github.com/holywyvern/react-isometric-tilemap#readme",
+  "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "7.1.6",
