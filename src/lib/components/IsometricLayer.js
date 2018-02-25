@@ -1,30 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import SizeProp from "../props/SizeProp";
+import MapProp from "../props/MapProp";
+
 import "./IsometricLayer.scss";
 
 class IsometricLayer extends Component {
   static propTypes = {
-    type: PropTypes.string,
-    map: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired
-    }),
-    sizes: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired
-    })
-  };
-  static defaultProps = {
-    type: "tiles",
-    map: {
-      width: 1,
-      height: 1
-    },
-    sizes: {
-      tile: 64,
-      slab: 16
-    }
+    type: PropTypes.string.isRequired,
+    map: MapProp,
+    sizes: SizeProp
   };
 
   render() {
