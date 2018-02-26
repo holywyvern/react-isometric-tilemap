@@ -1,0 +1,39 @@
+.react-isometric-tile {
+  --p-z: var(--z, 0);
+  --p-left-z: var(--left-z, var(--p-z, 0));
+  --p-right-z: var(--right-z, var(--p-z, 0));
+  --p-elevation: calc(-1 * var(--z) * var(--p-slab-size) * var(--p-size-unit));
+  grid-column: calc(1 + var(--x));
+  grid-row: calc(1 + var(--y));
+  position: relative;
+  width: calc(var(--p-size-unit) * var(--p-tile-size));
+  height: calc(var(--p-size-unit) * var(--p-tile-size));
+  transform: translate(var(--p-elevation), var(--p-elevation));
+  .floor {
+    position: absolute;
+    border: 1px solid green;
+    width: calc(var(--p-size-unit) * var(--p-tile-size));
+    height: calc(var(--p-size-unit) * var(--p-tile-size));
+    background: white;
+  }
+  .wall {
+    position: absolute;
+    background: white;
+    &.left {
+      border: 1px solid red;
+      width: calc(var(--p-size-unit) * var(--p-tile-size));
+      height: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-left-z));
+      transform: translateY(calc(var(--p-size-unit) * var(--p-tile-size)))
+        skewX(45deg);
+      transform-origin: right top;
+    }
+    &.right {
+      border: 1px solid blue;
+      height: calc(var(--p-size-unit) * var(--p-tile-size));
+      width: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-right-z));
+      transform: translateX(calc(var(--p-size-unit) * var(--p-tile-size)))
+        skewY(45deg);
+      transform-origin: left top;
+    }
+  }
+}

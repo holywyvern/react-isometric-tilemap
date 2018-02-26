@@ -1,15 +1,7 @@
-import IsometricTileset from "./components/IsometricTileset";
-import IsometricLayer from "./components/IsometricLayer";
-
-import IsometricTileLayer from "./components/IsometricTileLayer";
+import IsometricMap from "./components/IsometricMap";
 import IsometricTile from "./components/IsometricTile";
+import IsometricObject from "./components/IsometricObject";
 
-const Tileset = IsometricTileset;
-const Layer = IsometricLayer;
-const TileLayer = IsometricTileLayer;
-const Tile = IsometricTile;
+export { IsometricMap, IsometricTile, IsometricObject };
 
-export { IsometricTileset, IsometricLayer, IsometricTileLayer, IsometricTile };
-export { Tileset, Layer, TileLayer, Tile };
-
-export default IsometricTile;
+export default IsometricMap;

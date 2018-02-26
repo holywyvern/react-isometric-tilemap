@@ -1,0 +1,26 @@
+.react-isometric-map-wrapper {
+  --p-map-width: var(--map-width, 1);
+  --p-map-height: var(--map-height, 1);
+  --p-tile-size: var(--tile-size, 48);
+  --p-slab-size: var(--slab-size, 12);
+  --p-size-unit: var(--size-unit, 1px);
+}
+
+.react-isometric-map {
+  width: calc(var(--p-map-width) * var(--p-tile-size) * var(--p-size-unit));
+  height: calc(var(--p-map-height) * var(--p-tile-size) * var(--p-size-unit));
+  display: grid;
+  grid-template-columns: repeat(
+    var(--p-map-width),
+    calc(var(--p-size-unit) * var(--p-tile-size))
+  );
+  grid-template-rows: repeat(
+    var(--p-map-height),
+    calc(var(--p-size-unit) * var(--p-tile-size))
+  );
+  transform: rotateX(60deg) rotateZ(45deg)
+    translateX(
+      calc(var(--p-size-unit) * var(--p-map-width) * var(--p-tile-size) / 2)
+    );
+  transform-origin: center center;
+}
