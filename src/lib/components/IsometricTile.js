@@ -35,7 +35,30 @@ class IsometricTile extends Component {
     textures: null
   };
 
-  getMiddleWalls(textures, height, prefix) {
+  renderTopAndBottomWalls(textures, height, prefix) {
+    if (!textures) return null;
+    const results = [];
+    if (height > 0) {
+      results.push(
+        <img
+          key={`${prefix}-top`}
+          alt=""
+          src={textures.top}
+          className={`textures top ${prefix}`}
+        />,
+        <img
+          key={`${prefix}-bottom`}
+          alt=""
+          src={textures.bottom}
+          className={`textures bottom ${prefix}`}
+        />
+      );
+    }
+    return results;
+  }
+
+  renderMiddleWalls(textures, height, prefix) {
+    if (!textures) return null;
     const result = [];
     for (let i = 1; i < height; ++i) {
       result.push(
@@ -43,6 +66,7 @@ class IsometricTile extends Component {
           key={`${prefix}-middle-wall`}
           src={textures.middle}
           alt=""
+          className={`textures middle ${prefix}`}
           style={{ "--wall-index": i }}
         />
       );
@@ -70,20 +94,10 @@ class IsometricTile extends Component {
           {textures && textures.floor ? (
             <img src={textures.floor} alt="" className="floor" />
           ) : null}
-          {textures && textures.leftWall && lz > 0
-            ? [
-                <img key="l-top" alt="" src={textures.leftWall.top} />,
-                <img key="l-bottom" alt="" src={textures.leftWall.bottom} />
-              ]
-            : null}
-          {textures && textures.rightWall && lz > 0
-            ? [
-                <img key="r-top" alt="" src={textures.rightWall.top} />,
-                <img key="r-bottom" alt="" src={textures.rightWall.bottom} />
-              ]
-            : null}
-          {this.getMiddleWalls(textures && textures.rightWall, lz, "l")}
-          {this.getMiddleWalls(textures && textures.leftWall, rz, "l")}
+          {this.renderTopAndBottomWalls(textures && textures.leftWall)}
+          {this.renderTopAndBottomWalls(textures && textures.rightWall)}
+          {this.renderMiddleWalls(textures && textures.rightWall, lz, "left")}
+          {this.renderMiddleWalls(textures && textures.leftWall, rz, "left")}
         </div>
       </div>
     );
