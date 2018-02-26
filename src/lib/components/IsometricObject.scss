@@ -6,12 +6,12 @@
   grid-row: calc(1 + var(--y));
   width: calc(var(--p-size-unit) * var(--p-tile-size));
   height: calc(var(--p-size-unit) * var(--p-tile-size));
-  z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 4);
+  z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 6);
   transform: rotateZ(-45deg) scale(var(--p-ratio));
 }
 
 .react-isometric-object {
-  opacity: 0.3;
+  opacity: 0.1;
   pointer-events: none;
   position: absolute;
   left: calc(
@@ -23,7 +23,6 @@
   bottom: 0;
   width: calc(var(--p-size-unit) * var(--object-width) / var(--p-ratio));
   height: calc(var(--p-size-unit) * var(--object-height) * 2 / var(--p-ratio));
-  background: rgba(255, 0, 0, 1);
   &.active {
     opacity: 1;
     pointer-events: all;
