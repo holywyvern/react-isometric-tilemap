@@ -9,7 +9,23 @@ class IsometricTile extends Component {
     y: PropTypes.number.isRequired,
     z: PropTypes.number,
     leftZ: PropTypes.oneOf([PropTypes.number, null]),
-    rightZ: PropTypes.oneOf([PropTypes.number, null])
+    rightZ: PropTypes.oneOf([PropTypes.number, null]),
+    textures: PropTypes.oneOf([
+      null,
+      PropTypes.shape({
+        floor: PropTypes.string.isRequired,
+        leftWall: PropTypes.shape({
+          top: PropTypes.string.isRequired,
+          middle: PropTypes.string.isRequired,
+          bottom: PropTypes.string.isRequired
+        }).isRequired,
+        rightWall: PropTypes.shape({
+          top: PropTypes.string.isRequired,
+          middle: PropTypes.string.isRequired,
+          bottom: PropTypes.string.isRequired
+        }).isRequired
+      })
+    ])
   };
 
   static defaultProps = {

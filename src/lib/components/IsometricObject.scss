@@ -1,0 +1,25 @@
+.react-isometric-object-wrapper {
+  --p-z: var(--z, 0);
+  --p-elevation: calc(-1 * var(--z) * var(--p-slab-size) * var(--p-size-unit));
+  position: relative;
+  grid-column: calc(1 + var(--x));
+  grid-row: calc(1 + var(--y));
+  width: calc(var(--p-size-unit) * var(--p-tile-size));
+  height: calc(var(--p-size-unit) * var(--p-tile-size));
+  z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 4);
+  transform: rotateZ(-45deg) scale(var(--p-ratio));
+}
+
+.react-isometric-object {
+  position: absolute;
+  left: calc(
+    var(--p-size-unit) *
+      (
+        var(--p-tile-size) - var(--object-width) / var(--p-ratio)
+      ) / 2
+  );
+  bottom: 0;
+  width: calc(var(--p-size-unit) * var(--object-width) / var(--p-ratio));
+  height: calc(var(--p-size-unit) * var(--object-height) * 2 / var(--p-ratio));
+  background: rgba(255, 0, 0, 0.8);
+}

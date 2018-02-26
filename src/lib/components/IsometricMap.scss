@@ -1,7 +1,9 @@
 .react-isometric-map-wrapper {
+  --p-ratio: 1.4142;
   --p-map-width: var(--map-width, 1);
   --p-map-height: var(--map-height, 1);
-  --p-tile-size: var(--tile-size, 48);
+  --p-tile-size: calc(var(--tile-size, 48) / var(--p-ratio));
+  --p-v-tile-size: var(--tile-size, 48);
   --p-slab-size: var(--slab-size, 12);
   --p-size-unit: var(--size-unit, 1px);
 }

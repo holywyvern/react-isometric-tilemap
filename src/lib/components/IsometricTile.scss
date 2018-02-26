@@ -9,14 +9,18 @@
   width: calc(var(--p-size-unit) * var(--p-tile-size));
   height: calc(var(--p-size-unit) * var(--p-tile-size));
   transform: translate(var(--p-elevation), var(--p-elevation));
+  z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2);
   .floor {
+    box-sizing: border-box;
     position: absolute;
     border: 1px solid green;
     width: calc(var(--p-size-unit) * var(--p-tile-size));
     height: calc(var(--p-size-unit) * var(--p-tile-size));
     background: white;
+    z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
   }
   .wall {
+    box-sizing: border-box;
     position: absolute;
     background: white;
     &.left {
@@ -26,6 +30,7 @@
       transform: translateY(calc(var(--p-size-unit) * var(--p-tile-size)))
         skewX(45deg);
       transform-origin: right top;
+      z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 2);
     }
     &.right {
       border: 1px solid blue;
@@ -34,6 +39,7 @@
       transform: translateX(calc(var(--p-size-unit) * var(--p-tile-size)))
         skewY(45deg);
       transform-origin: left top;
+      z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 1);
     }
   }
 }
