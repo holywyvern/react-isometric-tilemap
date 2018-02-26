@@ -66,10 +66,10 @@
       top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) - 3px );
       transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
       &.left {
-        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }
       &.right {
-        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }
       z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
     }
@@ -79,10 +79,11 @@
       var(--p-size-unit) * (var(--p-slab-size) + 3) * var(--wall-index) - 1px );
       transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
       &.left {
-        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }
       &.right {
-        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
+      
       }
       z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
     }
@@ -94,14 +95,14 @@
           var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
           var(--p-size-unit) * var(--p-slab-size) * (var(--p-left-z) + 1) 
         );
-        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }      
       &.right {
         top: calc(
           var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
           var(--p-size-unit) * var(--p-slab-size) * (var(--p-right-z) + 1) 
         );     
-        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }
       z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
     }
