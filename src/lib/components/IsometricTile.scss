@@ -43,6 +43,7 @@
     }
   }
   .textures-group {
+    pointer-events: none;
     position: relative;
     transform: rotateZ(-45deg) scale(var(--p-ratio));
     width: calc(var(--p-size-unit) * var(--p-tile-size));
