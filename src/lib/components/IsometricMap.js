@@ -9,7 +9,13 @@ class IsometricMap extends Component {
     mapHeight: PropTypes.number.isRequired,
     tileSize: PropTypes.number.isRequired,
     slabSize: PropTypes.number.isRequired,
-    sizeUnit: PropTypes.string
+    sizeUnit: PropTypes.string,
+    margin: PropTypes.shape({
+      top: PropTypes.number.isRequired,
+      bottom: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
+      right: PropTypes.number.isRequired
+    }).isRequired
   };
 
   static defaultProps = {
@@ -23,14 +29,19 @@ class IsometricMap extends Component {
       mapHeight,
       tileSize,
       slabSize,
-      sizeUnit
+      sizeUnit,
+      margin
     } = this.props;
     const vars = {
       "--map-width": mapWidth,
       "--map-height": mapHeight,
       "--tile-size": tileSize,
       "--slab-suze": slabSize,
-      "--size-unit": sizeUnit
+      "--size-unit": sizeUnit,
+      "--margin-top": margin.top,
+      "--margin-bottom": margin.bottom,
+      "--margin-left": margin.left,
+      "--margin-right": margin.right
     };
     return (
       <div className="react-isometric-map-wrapper" style={vars}>
