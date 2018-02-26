@@ -11,7 +11,6 @@ class IsometricTile extends Component {
     leftZ: PropTypes.oneOf([PropTypes.number, null]),
     rightZ: PropTypes.oneOf([PropTypes.number, null]),
     textures: PropTypes.oneOf([
-      null,
       PropTypes.shape({
         floor: PropTypes.string.isRequired,
         leftWall: PropTypes.shape({
@@ -24,7 +23,8 @@ class IsometricTile extends Component {
           middle: PropTypes.string.isRequired,
           bottom: PropTypes.string.isRequired
         }).isRequired
-      })
+      }),
+      null
     ])
   };
 
@@ -63,7 +63,7 @@ class IsometricTile extends Component {
     for (let i = 1; i < height; ++i) {
       result.push(
         <img
-          key={`${prefix}-middle-wall`}
+          key={`${prefix}-middle-wall-${i}`}
           src={textures.middle}
           alt=""
           className={`textures middle ${prefix}`}
@@ -90,14 +90,14 @@ class IsometricTile extends Component {
         <div className="floor" />
         {lz > 0 ? <div className="wall left" /> : null}
         {rz > 0 ? <div className="wall right" /> : null}
-        <div className="textures">
+        <div className="textures-group">
+          {this.renderMiddleWalls(textures && textures.rightWall, lz, "right")}
+          {this.renderMiddleWalls(textures && textures.leftWall, rz, "left")}        
+          {this.renderTopAndBottomWalls(textures && textures.leftWall, lz, "left")}
+          {this.renderTopAndBottomWalls(textures && textures.rightWall, rz, "right")}
           {textures && textures.floor ? (
-            <img src={textures.floor} alt="" className="floor" />
-          ) : null}
-          {this.renderTopAndBottomWalls(textures && textures.leftWall)}
-          {this.renderTopAndBottomWalls(textures && textures.rightWall)}
-          {this.renderMiddleWalls(textures && textures.rightWall, lz, "left")}
-          {this.renderMiddleWalls(textures && textures.leftWall, rz, "left")}
+            <img src={textures.floor} alt="" className="textures floor" />
+          ) : null}          
         </div>
       </div>
     );

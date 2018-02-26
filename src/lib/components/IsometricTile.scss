@@ -2,7 +2,7 @@
   --p-z: var(--z, 0);
   --p-left-z: var(--left-z, var(--p-z, 0));
   --p-right-z: var(--right-z, var(--p-z, 0));
-  --p-elevation: calc(-1 * var(--z) * var(--p-slab-size) * var(--p-size-unit));
+  --p-elevation: calc(-1 * var(--z) * var(--p-slab-size) * var(--p-size-unit) * var(--p-ratio));
   grid-column: calc(1 + var(--x));
   grid-row: calc(1 + var(--y));
   position: relative;
@@ -10,7 +10,7 @@
   height: calc(var(--p-size-unit) * var(--p-tile-size));
   transform: translate(var(--p-elevation), var(--p-elevation));
   z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2);
-  .floor {
+  &> .floor {
     box-sizing: border-box;
     position: absolute;
     border: 1px solid green;
@@ -19,14 +19,14 @@
     background: white;
     z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 3);
   }
-  .wall {
+  &> .wall {
     box-sizing: border-box;
     position: absolute;
     background: white;
     &.left {
       border: 1px solid red;
       width: calc(var(--p-size-unit) * var(--p-tile-size));
-      height: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-left-z));
+      height: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-left-z) * var(--p-ratio));
       transform: translateY(calc(var(--p-size-unit) * var(--p-tile-size)))
         skewX(45deg);
       transform-origin: right top;
@@ -34,12 +34,71 @@
     }
     &.right {
       border: 1px solid blue;
-      height: calc(var(--p-size-unit) * var(--p-tile-size));
-      width: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-right-z));
+      height: calc(var(--p-size-unit) * var(--p-tile-size) );
+      width: calc(var(--p-size-unit) * var(--p-slab-size) * var(--p-right-z) * var(--p-ratio));
       transform: translateX(calc(var(--p-size-unit) * var(--p-tile-size)))
         skewY(45deg);
       transform-origin: left top;
       z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 1);
+    }
+  }
+  .textures-group {
+    position: relative;
+    transform: rotateZ(-45deg) scale(var(--p-ratio));
+    width: calc(var(--p-size-unit) * var(--p-tile-size));
+    height: calc(var(--p-size-unit) * (var(--p-tile-size) ));   
+    --p-inverse-ratio: calc(1.24266482568174); 
+    .floor {
+      position: absolute;
+
+      left:  calc(var(--p-size-unit) * -1 * (var(--p-margin-left) + var(--p-tile-size) / 2) / var(--p-ratio) + 1px);
+      right: calc(var(--p-size-unit) * var(--p-margin-right) / var(--p-ratio));
+      top: calc(-1 * var(--p-size-unit) * var(--p-margin-top) / var(--p-ratio)  + 1px);
+      bottom: calc(-1 * var(--p-size-unit) * var(--p-margin-bottom) / var(--p-ratio));
+    
+      transform-origin: center center;
+      transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
+    }
+    .top {
+      position: absolute;
+      top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) - 3px );
+      transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
+      &.left {
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }
+      &.right {
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }
+    }
+    .middle {
+      position: absolute;
+      top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
+      var(--p-size-unit) * (var(--p-slab-size) + 3) * var(--wall-index) - 1px );
+      transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
+      &.left {
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }
+      &.right {
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }
+    }
+    .bottom {
+      transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
+      position: absolute;
+      &.left {
+        top: calc(
+          var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
+          var(--p-size-unit) * var(--p-slab-size) * (var(--p-left-z) + 1) 
+        );
+        left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }      
+      &.right {
+        top: calc(
+          var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
+          var(--p-size-unit) * var(--p-slab-size) * (var(--p-right-z) + 1) 
+        );     
+        right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 2px  );
+      }
     }
   }
 }
