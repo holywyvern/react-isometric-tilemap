@@ -26,7 +26,7 @@ const App = () => (
   >
     <IsometricTile x={0} y={0} z={3} textures={textures} />
     <IsometricTile x={1} y={1} />
-    <IsometricObject x={1} y={1} width={64} height={64} />
+    <IsometricObject x={1} y={1} width={64} height={64}  />
   </IsometricMap>
 );
 

@@ -9,15 +9,17 @@ class IsometricObject extends Component {
     y: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    z: PropTypes.number
+    z: PropTypes.number,
+    active: PropTypes.bool
   };
 
   static defaultProps = {
-    z: 0
+    z: 0,
+    active: false
   };
 
   render() {
-    const { x, y, z, width, height } = this.props;
+    const { x, y, z, width, height, active } = this.props;
     const vars = {
       "--x": x,
       "--y": y,
@@ -25,9 +27,13 @@ class IsometricObject extends Component {
       "--object-width": width,
       "--object-height": height
     };
+    const classes = ["react-isometric-object"];
+    if (active) {
+      classes.push("active");
+    }
     return (
       <div className="react-isometric-object-wrapper" style={vars}>
-        <div className="react-isometric-object" />
+        <div className={classes.join(" ")} />
       </div>
     );
   }
