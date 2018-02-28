@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import MiniSignal from "mini-signals";
+import raf from "raf";
+
 import "./IsometricMap.scss";
 
 class IsometricMap extends Component {
@@ -20,6 +23,39 @@ class IsometricMap extends Component {
 
   static defaultProps = {
     sizeUnit: "1px"
+  };
+
+  static childContextTypes = {
+    ticker: PropTypes.object
+  };
+
+  constructor(props) {
+    super(props);
+    this.ticker = new MiniSignal();
+  }
+
+  componentDidMount() {
+    this.__isMounted = true;
+    this.__lastUpdate = Date.now();
+    raf(this.onFrameUpdate);
+  }
+
+  componentWillUnmount() {
+    this.__isMounted = false;
+  }
+
+  getChildContext() {
+    return {
+      ticker: this.ticker
+    };
+  }
+
+  onFrameUpdate = delta => {
+    if (!this.__isMounted) return;
+    raf(this.onFrameUpdate);
+    const now = Date.now();
+    this.ticker.dispatch(now - this.__lastUpdate);
+    this.__lastUpdate = now;
   };
 
   render() {

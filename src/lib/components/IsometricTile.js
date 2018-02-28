@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import AnimatedTexture from "./AnimatedTexture";
+
 import "./IsometricTile.scss";
 
 class IsometricTile extends Component {
@@ -10,7 +12,7 @@ class IsometricTile extends Component {
     z: PropTypes.number,
     leftZ: PropTypes.oneOf([PropTypes.number, null]),
     rightZ: PropTypes.oneOf([PropTypes.number, null]),
-    textures: PropTypes.oneOf([
+    frames: PropTypes.arrayOf(
       PropTypes.shape({
         floor: PropTypes.string.isRequired,
         leftWall: PropTypes.shape({
@@ -23,34 +25,38 @@ class IsometricTile extends Component {
           middle: PropTypes.string.isRequired,
           bottom: PropTypes.string.isRequired
         }).isRequired
-      }),
-      null
-    ]),
-    className: PropTypes.string
+      })      
+    ),
+    delay: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
   };
 
   static defaultProps = {
     z: 0,
     leftZ: null,
     rightZ: null,
-    textures: null
+    delay: 0
   };
 
-  renderTopAndBottomWalls(textures, height, prefix) {
-    if (!textures) return null;
+  renderTopAndBottomWalls(mapper, height, prefix) {
+    const { frames, delay } = this.props;
+    if (!frames) return;
     const results = [];
+    const textures = frames.map(mapper);
     if (height > 0) {
       results.push(
-        <img
+        <AnimatedTexture
           key={`${prefix}-top`}
-          alt=""
-          src={textures.top}
+          frames={textures.map(i => i.top)}
+          delay={delay}
           className={`textures top ${prefix}`}
+          
         />,
-        <img
+        <AnimatedTexture
           key={`${prefix}-bottom`}
-          alt=""
-          src={textures.bottom}
+          frames={textures.map(i => i.bottom)}
+          delay={delay}
           className={`textures bottom ${prefix}`}
         />
       );
@@ -58,15 +64,17 @@ class IsometricTile extends Component {
     return results;
   }
 
-  renderMiddleWalls(textures, height, prefix) {
-    if (!textures) return null;
+  renderMiddleWalls(mapper, height, prefix) {
+    const { frames, delay } = this.props;
+    if (!frames) return;
+    const textures = frames.map(mapper);
     const result = [];
     for (let i = 1; i < height; ++i) {
       result.push(
-        <img
+        <AnimatedTexture
           key={`${prefix}-middle-wall-${i}`}
-          src={textures.middle}
-          alt=""
+          frames={textures}
+          delay={delay}
           className={`textures middle ${prefix}`}
           style={{ "--wall-index": i }}
         />
@@ -76,10 +84,11 @@ class IsometricTile extends Component {
   }
 
   render() {
-    const { x, y, z, leftZ, rightZ, textures, className } = this.props;
+    const { x, y, z, leftZ, rightZ, className, frames, delay, style } = this.props;
     const lz = leftZ === null ? z : leftZ;
     const rz = rightZ === null ? z : rightZ;
     const vars = {
+      ...(style || {}),
       "--x": x,
       "--y": y,
       "--z": z,
@@ -94,12 +103,16 @@ class IsometricTile extends Component {
         {lz > 0 ? <div className="wall left" /> : null}
         {rz > 0 ? <div className="wall right" /> : null}
         <div className="textures-group">
-          {this.renderMiddleWalls(textures && textures.rightWall, lz, "right")}
-          {this.renderMiddleWalls(textures && textures.leftWall, rz, "left")}        
-          {this.renderTopAndBottomWalls(textures && textures.leftWall, lz, "left")}
-          {this.renderTopAndBottomWalls(textures && textures.rightWall, rz, "right")}
-          {textures && textures.floor ? (
-            <img src={textures.floor} alt="" className="textures floor" />
+          {this.renderMiddleWalls((i => i.rightWall.middle), lz, "right")}
+          {this.renderMiddleWalls((i => i.leftWall.middle), rz, "left")}        
+          {this.renderTopAndBottomWalls((i => i.leftWall), lz, "left")}
+          {this.renderTopAndBottomWalls((i => i.rightWall), rz, "right")}
+          {frames ? (
+            <AnimatedTexture
+              frames={frames.map(i => i.floor)}  
+              delay={delay} 
+              className="textures floor" 
+            />
           ) : null}          
         </div>
       </div>

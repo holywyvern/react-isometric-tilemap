@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import AnimatedTexture from "./AnimatedTexture";
+
 import "./IsometricObject.scss";
 
 class IsometricObject extends Component {
@@ -11,17 +13,22 @@ class IsometricObject extends Component {
     height: PropTypes.number.isRequired,
     z: PropTypes.number,
     active: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+    style: PropTypes.object,
+    frames: PropTypes.arrayOf(PropTypes.string),
+    delay: PropTypes.number
   };
 
   static defaultProps = {
     z: 0,
+    delay: 0,
     active: false
   };
 
   render() {
-    const { x, y, z, width, height, active, className } = this.props;
+    const { x, y, z, width, height, active, className, style, frames, delay } = this.props;
     const vars = {
+      ...(style || {}),
       "--x": x,
       "--y": y,
       "--z": z,
@@ -35,7 +42,9 @@ class IsometricObject extends Component {
     }
     return (
       <div className="react-isometric-object-wrapper" style={vars}>
-        <div className={classes.join(" ")} />
+        <div className={classes.join(" ")}>
+          {frames ? <AnimatedTexture frames={frames} delay={delay}/> : null}
+        </div>
       </div>
     );
   }

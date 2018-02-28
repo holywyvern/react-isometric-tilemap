@@ -20,6 +20,7 @@
   "homepage": "https://github.com/holywyvern/react-isometric-tilemap#readme",
   "license": "Apache-2.0",
   "dependencies": {
+    "mini-signals": "^1.2.0",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
@@ -52,7 +53,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
-    "raf": "3.4.0",
+    "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.2.0",
