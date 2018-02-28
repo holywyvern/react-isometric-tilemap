@@ -7,7 +7,8 @@ class AnimatedTexture extends Component {
         frames: PropTypes.arrayOf(PropTypes.string).isRequired,
         delay: PropTypes.number.isRequired,
         className: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        onClick: PropTypes.func
     };
 
     static contextTypes  = {
@@ -81,11 +82,18 @@ class AnimatedTexture extends Component {
         this.setState({ currentFrame, currentDelay });
     }
 
+    onClick = () => {
+        const { onClick } = this.props;
+        if (typeof onClick === "function") {
+          onClick();
+        }
+    };
+
     render() {
         const { frames, ...props } = this.props;
         const { currentFrame } = this.state;
         return (
-            <img {...props} key="img" src={frames[currentFrame]} alt="" />
+            <img {...props} key="img" onClick={this.onClick} src={frames[currentFrame]} alt="" />
         );
     }
 

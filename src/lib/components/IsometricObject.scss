@@ -1,6 +1,7 @@
 .react-isometric-object-wrapper {
   --p-z: var(--z, 0);
-  --p-elevation: calc(-1 * var(--z) * var(--p-slab-size) * var(--p-size-unit));
+  --p-elevation: calc(var(--z) * var(--p-slab-size) * var(--p-size-unit) * var(--p-ratio));
+  --p-margin: calc(-1 * var(--p-size-unit) * var(--p-margin-bottom) * var(--p-ratio));
   position: relative;
   grid-column: calc(1 + var(--x));
   grid-row: calc(1 + var(--y));
@@ -11,8 +12,8 @@
 }
 
 .react-isometric-object {
-  opacity: 0.5;
   pointer-events: none;
+  opacity: 0.5;
   position: absolute;
   left: calc(
     var(--p-size-unit) *
@@ -20,14 +21,16 @@
         var(--p-tile-size) - var(--object-width) / var(--p-ratio)
       ) / 2
   );
-  bottom: calc(-1 * var(--p-size-unit) * var(--p-margin-bottom) * var(--p-ratio));
+  --p-bottom: calc(var(--p-margin) + var(--p-elevation));
+  bottom: var(--p-bottom);
   width: calc(var(--p-size-unit) * var(--object-width) / var(--p-ratio));
   height: calc(var(--p-size-unit) * var(--object-height) * 2 / var(--p-ratio));
   &.active {
+    pointer-events: auto;
     opacity: 1;
-    pointer-events: all;
   }
   img {
+    pointer-events: none;
     width: 100%;
     height: 100%;
   }

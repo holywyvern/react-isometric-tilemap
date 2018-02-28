@@ -63,7 +63,7 @@
     }
     .top {
       position: absolute;
-      top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) - 3px );
+      top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) - 1px );
       transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
       &.left {
         left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
@@ -76,7 +76,7 @@
     .middle {
       position: absolute;
       top: calc(var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
-      var(--p-size-unit) * (var(--p-slab-size) + 3) * var(--wall-index) - 1px );
+      var(--p-size-unit) * (var(--p-slab-size)) * var(--wall-index) * var(--p-ratio) - 1px );
       transform: scale(calc(1 / var(--p-ratio))) scaleY(2);
       &.left {
         left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
@@ -93,14 +93,14 @@
       &.left {
         top: calc(
           var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
-          var(--p-size-unit) * var(--p-slab-size) * (var(--p-left-z) + 1) 
+          var(--p-size-unit) * var(--p-slab-size) * var(--p-left-z) * var(--p-ratio)
         );
         left:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }      
       &.right {
         top: calc(
           var(--p-size-unit) * ( var(--p-tile-size)   ) / var(--p-ratio) + 
-          var(--p-size-unit) * var(--p-slab-size) * (var(--p-right-z) + 1) 
+          var(--p-size-unit) * var(--p-slab-size) * var(--p-right-z) * var(--p-ratio)
         );     
         right:  calc(var(--p-size-unit) * -1 * ( var(--p-tile-size) / 2 ) / var(--p-ratio) - 1px  );
       }

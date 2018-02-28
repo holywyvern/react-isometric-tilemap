@@ -19,7 +19,9 @@ class IsometricMap extends Component {
       left: PropTypes.number.isRequired,
       right: PropTypes.number.isRequired
     }).isRequired,
-    offsetY: PropTypes.number
+    offsetY: PropTypes.number,
+    onMouseDown: PropTypes.func,
+    onMouseUp: PropTypes.func
   };
 
   static defaultProps = {
@@ -60,6 +62,24 @@ class IsometricMap extends Component {
     this.__lastUpdate = now;
   };
 
+  onMouseDown = event => {
+    if (event.button === 0) {
+      const { onMouseDown } = this.props;
+      if (typeof onMouseDown === "function") {
+        onMouseDown();
+      }
+    }
+  };
+
+  onMouseUp = event => {
+    if (event.button === 0) {
+      const { onMouseUp } = this.props;
+      if (typeof onMouseUp === "function") {
+        onMouseUp();
+      }      
+    }
+  };
+
   render() {
     const {
       children,
@@ -85,7 +105,7 @@ class IsometricMap extends Component {
       "--map-offset-y": offsetY
     };
     return (
-      <div className="react-isometric-map-wrapper" style={vars}>
+      <div className="react-isometric-map-wrapper" style={vars} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
         <div className="react-isometric-map">{children}</div>
       </div>
     );

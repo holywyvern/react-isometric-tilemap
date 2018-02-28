@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import AnimatedTexture from "./AnimatedTexture";
 
+import IsometricMapEvent from "./IsometricMapEvent";
+
 import "./IsometricTile.scss";
 
 class IsometricTile extends Component {
@@ -29,7 +31,12 @@ class IsometricTile extends Component {
     ),
     delay: PropTypes.number,
     className: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    onClick: PropTypes.func,
+    onFloorClick: PropTypes.func,
+    onWallClick: PropTypes.func,
+    onLeftWallClick: PropTypes.func,
+    onRigthWallClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -37,6 +44,46 @@ class IsometricTile extends Component {
     leftZ: null,
     rightZ: null,
     delay: 0
+  };
+
+
+  onFloorClick = () => {
+    const { onClick, onFloorClick, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "floor");
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
+    if (typeof onFloorClick === "function") {
+      onFloorClick(event);
+    }
+  };
+
+  onLeftWallClick = () => {
+    const { onClick, onWallClick, onLeftWallClick, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "left-wall");
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
+    if (typeof onWallClick === "function") {
+      onWallClick(event);
+    }
+    if (typeof onLeftWallClick === "function") {
+      onLeftWallClick(event);
+    }    
+  };
+
+  onRigthWallClick = () => {
+    const { onClick, onWallClick, onRigthWallClick, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "right-wall");
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
+    if (typeof onWallClick === "function") {
+      onWallClick(event);
+    }
+    if (typeof onRigthWallClick === "function") {
+      onRigthWallClick(event);
+    }  
   };
 
   renderTopAndBottomWalls(mapper, height, prefix) {
@@ -51,7 +98,6 @@ class IsometricTile extends Component {
           frames={textures.map(i => i.top)}
           delay={delay}
           className={`textures top ${prefix}`}
-          
         />,
         <AnimatedTexture
           key={`${prefix}-bottom`}
@@ -69,7 +115,8 @@ class IsometricTile extends Component {
     if (!frames) return;
     const textures = frames.map(mapper);
     const result = [];
-    for (let i = 1; i < height; ++i) {
+    const h = height
+    for (let i = 1; i < h; ++i) {
       result.push(
         <AnimatedTexture
           key={`${prefix}-middle-wall-${i}`}
@@ -99,9 +146,9 @@ class IsometricTile extends Component {
     if (className) classes.push(className);
     return (
       <div className={classes.join(" ")} style={vars}>
-        <div className="floor" />
-        {lz > 0 ? <div className="wall left" /> : null}
-        {rz > 0 ? <div className="wall right" /> : null}
+        <div className="floor" onClick={this.onFloorClick} />
+        {lz > 0 ? <div className="wall left" onClick={this.onLeftWallClick} /> : null}
+        {rz > 0 ? <div className="wall right" onClick={this.onRigthWallClick} /> : null}
         <div className="textures-group">
           {this.renderMiddleWalls((i => i.rightWall.middle), lz, "right")}
           {this.renderMiddleWalls((i => i.leftWall.middle), rz, "left")}        

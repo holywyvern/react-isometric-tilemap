@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import AnimatedTexture from "./AnimatedTexture";
 
+import IsometricMapEvent from "./IsometricMapEvent";
+
 import "./IsometricObject.scss";
 
 class IsometricObject extends Component {
@@ -16,13 +18,23 @@ class IsometricObject extends Component {
     className: PropTypes.string,
     style: PropTypes.object,
     frames: PropTypes.arrayOf(PropTypes.string),
-    delay: PropTypes.number
+    delay: PropTypes.number,
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
     z: 0,
     delay: 0,
     active: false
+  };
+
+  onClick = event => {
+    const { x, y, onClick, active } = this.props;
+    if (!active) return;
+    event.stopPropagation();
+    if (typeof onClick === "function") {
+      onClick(new IsometricMapEvent(this, x, y, "object"));
+    }
   };
 
   render() {
@@ -42,7 +54,7 @@ class IsometricObject extends Component {
     }
     return (
       <div className="react-isometric-object-wrapper" style={vars}>
-        <div className={classes.join(" ")}>
+        <div className={classes.join(" ")} onClick={this.onClick}>
           {frames ? <AnimatedTexture frames={frames} delay={delay}/> : null}
         </div>
       </div>
