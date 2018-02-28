@@ -25,7 +25,8 @@ class IsometricTile extends Component {
         }).isRequired
       }),
       null
-    ])
+    ]),
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -75,7 +76,7 @@ class IsometricTile extends Component {
   }
 
   render() {
-    const { x, y, z, leftZ, rightZ, textures } = this.props;
+    const { x, y, z, leftZ, rightZ, textures, className } = this.props;
     const lz = leftZ === null ? z : leftZ;
     const rz = rightZ === null ? z : rightZ;
     const vars = {
@@ -85,8 +86,10 @@ class IsometricTile extends Component {
       "--left-z": lz,
       "--right-z": rz
     };
+    const classes = ["react-isometric-tile"];
+    if (className) classes.push(className);
     return (
-      <div className="react-isometric-tile" style={vars}>
+      <div className={classes.join(" ")} style={vars}>
         <div className="floor" />
         {lz > 0 ? <div className="wall left" /> : null}
         {rz > 0 ? <div className="wall right" /> : null}
