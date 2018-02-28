@@ -18,11 +18,13 @@ class IsometricMap extends Component {
       bottom: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
       right: PropTypes.number.isRequired
-    }).isRequired
+    }).isRequired,
+    offsetY: PropTypes.number
   };
 
   static defaultProps = {
-    sizeUnit: "1px"
+    sizeUnit: "1px",
+    offsetY: 0
   };
 
   static childContextTypes = {
@@ -66,7 +68,8 @@ class IsometricMap extends Component {
       tileSize,
       slabSize,
       sizeUnit,
-      margin
+      margin,
+      offsetY
     } = this.props;
     const vars = {
       "--map-width": mapWidth,
@@ -77,7 +80,9 @@ class IsometricMap extends Component {
       "--margin-top": margin.top,
       "--margin-bottom": margin.bottom,
       "--margin-left": margin.left,
-      "--margin-right": margin.right
+      "--margin-right": margin.right,
+      "--map-max-dimension": Math.max(mapWidth, mapHeight),
+      "--map-offset-y": offsetY
     };
     return (
       <div className="react-isometric-map-wrapper" style={vars}>
