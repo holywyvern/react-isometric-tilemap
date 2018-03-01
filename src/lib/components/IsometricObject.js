@@ -19,7 +19,10 @@ class IsometricObject extends Component {
     style: PropTypes.object,
     frames: PropTypes.arrayOf(PropTypes.string),
     delay: PropTypes.number,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onEnter: PropTypes.func,
+    onLeave: PropTypes.func,
+    onMouseAction: PropTypes.func
   };
 
   static defaultProps = {
@@ -28,17 +31,58 @@ class IsometricObject extends Component {
     active: false
   };
 
-  onClick = event => {
-    const { x, y, onClick, active } = this.props;
+  onClick = e => {
+    const { x, y, onClick, onMouseAction, active } = this.props;
     if (!active) return;
-    event.stopPropagation();
+    const event = new IsometricMapEvent(this, x, y, "click", "object");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
     if (typeof onClick === "function") {
-      onClick(new IsometricMapEvent(this, x, y, "object"));
+      onClick(event);
+    }
+  };
+
+  onMouseEnter = e => {
+    const { x, y, onEnter, onMouseAction, active } = this.props;
+    if (!active) return;
+    const event = new IsometricMapEvent(this, x, y, "enter", "object");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onEnter === "function") {
+      onEnter(event);
+    }
+  };
+
+  onMouseLeave = e => {
+    const { x, y, onLeave, onMouseAction, active } = this.props;
+    if (!active) return;
+    const event = new IsometricMapEvent(this, x, y, "leave", "object");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onLeave === "function") {
+      onLeave(event);
     }
   };
 
   render() {
-    const { x, y, z, width, height, active, className, style, frames, delay } = this.props;
+    const {
+      x,
+      y,
+      z,
+      width,
+      height,
+      active,
+      className,
+      style,
+      frames,
+      delay
+    } = this.props;
     const vars = {
       ...(style || {}),
       "--x": x,
@@ -55,7 +99,7 @@ class IsometricObject extends Component {
     return (
       <div className="react-isometric-object-wrapper" style={vars}>
         <div className={classes.join(" ")} onClick={this.onClick}>
-          {frames ? <AnimatedTexture frames={frames} delay={delay}/> : null}
+          {frames ? <AnimatedTexture frames={frames} delay={delay} /> : null}
         </div>
       </div>
     );

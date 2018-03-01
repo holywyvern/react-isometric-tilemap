@@ -12,12 +12,24 @@
   --p-margin-left: var(--margin-left, 12);
   --p-margin-right: var(--margin-right, 12);
   --p-margin-bottom: var(--margin-bottom, 12);
-  --p-center-y: calc(
-    var(--p-map-max-dimension) * var(--p-tile-size) / 2
-  );
+  --p-center-y: calc(var(--p-map-max-dimension) * var(--p-tile-size) / 2);
   --p-map-offset-y: var(--map-offset-y, 0);
-  --p-center-x: calc( 
-    (var(--p-map-width) + var(--map-height) - 1 ) * var(--p-tile-size) / 2
+  --p-center-x: calc(
+    (var(--p-map-width) + var(--map-height) - 1) * var(--p-tile-size) / 2
+  );
+  width: calc(
+    var(--p-size-unit) *
+      (
+        var(--p-v-tile-size) * (var(--p-map-width) + var(--p-map-height) + 5) /
+          2
+      )
+  );
+  height: calc(
+    var(--p-size-unit) *
+      (
+        var(--p-map-offset-y) + var(--p-map-max-dimension) *
+          var(--p-v-tile-size)
+      )
   );
 }
 
@@ -34,13 +46,10 @@
     var(--p-map-height),
     calc(var(--p-size-unit) * var(--p-tile-size))
   );
-  transform: 
-    translate(
-      calc(var(--p-size-unit) * var(--p-center-x)),
-      calc(var(--p-size-unit) * ( var(--p-center-y) +  var(--p-map-offset-y) ))
-    )  
-    rotateX(60deg) 
-    rotateZ(45deg)
-    ;
+  transform: translate(
+      calc(var(--p-size-unit) * (var(--p-tile-size) * 3 - var(--p-tile-size))),
+      calc(var(--p-size-unit) * (var(--p-center-y) + var(--p-map-offset-y)))
+    )
+    rotateX(60deg) rotateZ(45deg);
   transform-origin: center center;
 }

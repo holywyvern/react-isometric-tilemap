@@ -27,16 +27,31 @@ class IsometricTile extends Component {
           middle: PropTypes.string.isRequired,
           bottom: PropTypes.string.isRequired
         }).isRequired
-      })      
+      })
     ),
     delay: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object,
+    // Catch all events
+    onMouseAction: PropTypes.func,
+    // Click Events
     onClick: PropTypes.func,
     onFloorClick: PropTypes.func,
     onWallClick: PropTypes.func,
     onLeftWallClick: PropTypes.func,
     onRigthWallClick: PropTypes.func,
+    // Mouse enter events
+    onEnter: PropTypes.func,
+    onFloorEnter: PropTypes.func,
+    onWallEnter: PropTypes.func,
+    onLeftWallEnter: PropTypes.func,
+    onRigthWallEnter: PropTypes.func,
+    // Mouse exit events
+    onLeave: PropTypes.func,
+    onFloorLeave: PropTypes.func,
+    onWallLeave: PropTypes.func,
+    onLeftWallLeave: PropTypes.func,
+    onRigthWallLeave: PropTypes.func
   };
 
   static defaultProps = {
@@ -46,10 +61,13 @@ class IsometricTile extends Component {
     delay: 0
   };
 
-
-  onFloorClick = () => {
-    const { onClick, onFloorClick, x, y } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "floor");
+  onFloorClick = e => {
+    const { onMouseAction, onClick, onFloorClick, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "click", "floor");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
     if (typeof onClick === "function") {
       onClick(event);
     }
@@ -58,9 +76,20 @@ class IsometricTile extends Component {
     }
   };
 
-  onLeftWallClick = () => {
-    const { onClick, onWallClick, onLeftWallClick, x, y } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "left-wall");
+  onLeftWallClick = e => {
+    const {
+      onMouseAction,
+      onClick,
+      onWallClick,
+      onLeftWallClick,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "click", "left-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
     if (typeof onClick === "function") {
       onClick(event);
     }
@@ -69,12 +98,23 @@ class IsometricTile extends Component {
     }
     if (typeof onLeftWallClick === "function") {
       onLeftWallClick(event);
-    }    
+    }
   };
 
-  onRigthWallClick = () => {
-    const { onClick, onWallClick, onRigthWallClick, x, y } = this.props;
-    const event = new IsometricMapEvent(this, x, y, "right-wall");
+  onRigthWallClick = e => {
+    const {
+      onMouseAction,
+      onClick,
+      onWallClick,
+      onRigthWallClick,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "click", "right-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
     if (typeof onClick === "function") {
       onClick(event);
     }
@@ -83,7 +123,137 @@ class IsometricTile extends Component {
     }
     if (typeof onRigthWallClick === "function") {
       onRigthWallClick(event);
-    }  
+    }
+  };
+
+  onFloorMouseEnter = e => {
+    const { onMouseAction, onEnter, onFloorEnter, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "enter", "floor");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onEnter === "function") {
+      onEnter(event);
+    }
+    if (typeof onFloorEnter === "function") {
+      onFloorEnter(event);
+    }
+  };
+
+  onFloorMouseLeave = e => {
+    const { onMouseAction, onLeave, onFloorLeave, x, y } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "leave", "floor");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onLeave === "function") {
+      onLeave(event);
+    }
+    if (typeof onFloorLeave === "function") {
+      onFloorLeave(event);
+    }
+  };
+
+  onLeftWallEnter = e => {
+    const {
+      onMouseAction,
+      onEnter,
+      onWallEnter,
+      onLeftWallEnter,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "enter", "left-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onEnter === "function") {
+      onEnter(event);
+    }
+    if (typeof onWallEnter === "function") {
+      onWallEnter(event);
+    }
+    if (typeof onLeftWallEnter === "function") {
+      onLeftWallEnter(event);
+    }
+  };
+
+  onLeftWallLeave = e => {
+    const {
+      onMouseAction,
+      onLeave,
+      onWallLeave,
+      onLeftWallLeave,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "leave", "left-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onLeave === "function") {
+      onLeave(event);
+    }
+    if (typeof onWallLeave === "function") {
+      onWallLeave(event);
+    }
+    if (typeof onLeftWallLeave === "function") {
+      onLeftWallLeave(event);
+    }
+  };
+
+  onRightWallEnter = e => {
+    const {
+      onMouseAction,
+      onEnter,
+      onWallEnter,
+      onRightWallEnter,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "enter", "right-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onEnter === "function") {
+      onEnter(event);
+    }
+    if (typeof onWallEnter === "function") {
+      onWallEnter(event);
+    }
+    if (typeof onRightWallEnter === "function") {
+      onRightWallEnter(event);
+    }
+  };
+
+  onRightWallLeave = e => {
+    const {
+      onMouseAction,
+      onLeave,
+      onWallLeave,
+      onRightWallLeave,
+      x,
+      y
+    } = this.props;
+    const event = new IsometricMapEvent(this, x, y, "leave", "right-wall");
+    e.stopPropagation();
+    if (typeof onMouseAction === "function") {
+      onMouseAction(event);
+    }
+    if (typeof onLeave === "function") {
+      onLeave(event);
+    }
+    if (typeof onWallLeave === "function") {
+      onWallLeave(event);
+    }
+    if (typeof onRightWallLeave === "function") {
+      onRightWallLeave(event);
+    }
   };
 
   renderTopAndBottomWalls(mapper, height, prefix) {
@@ -115,7 +285,7 @@ class IsometricTile extends Component {
     if (!frames) return;
     const textures = frames.map(mapper);
     const result = [];
-    const h = height
+    const h = height;
     for (let i = 1; i < h; ++i) {
       result.push(
         <AnimatedTexture
@@ -131,7 +301,17 @@ class IsometricTile extends Component {
   }
 
   render() {
-    const { x, y, z, leftZ, rightZ, className, frames, delay, style } = this.props;
+    const {
+      x,
+      y,
+      z,
+      leftZ,
+      rightZ,
+      className,
+      frames,
+      delay,
+      style
+    } = this.props;
     const lz = leftZ === null ? z : leftZ;
     const rz = rightZ === null ? z : rightZ;
     const vars = {
@@ -146,21 +326,40 @@ class IsometricTile extends Component {
     if (className) classes.push(className);
     return (
       <div className={classes.join(" ")} style={vars}>
-        <div className="floor" onClick={this.onFloorClick} />
-        {lz > 0 ? <div className="wall left" onClick={this.onLeftWallClick} /> : null}
-        {rz > 0 ? <div className="wall right" onClick={this.onRigthWallClick} /> : null}
+        <div
+          className="floor"
+          onClick={this.onFloorClick}
+          onMouseEnter={this.onFloorMouseEnter}
+          onMouseLeave={this.onFloorMouseLeave}
+        />
+        {lz > 0 ? (
+          <div
+            className="wall left"
+            onClick={this.onLeftWallClick}
+            onMouseEnter={this.onLeftWallEnter}
+            onMouseLeave={this.onLeftWallLeave}
+          />
+        ) : null}
+        {rz > 0 ? (
+          <div
+            className="wall right"
+            onClick={this.onRigthWallClick}
+            onMouseEnter={this.onRightWallEnter}
+            onMouseLeave={this.onRightWallLeave}
+          />
+        ) : null}
         <div className="textures-group">
-          {this.renderMiddleWalls((i => i.rightWall.middle), lz, "right")}
-          {this.renderMiddleWalls((i => i.leftWall.middle), rz, "left")}        
-          {this.renderTopAndBottomWalls((i => i.leftWall), lz, "left")}
-          {this.renderTopAndBottomWalls((i => i.rightWall), rz, "right")}
+          {this.renderMiddleWalls(i => i.rightWall.middle, lz, "right")}
+          {this.renderMiddleWalls(i => i.leftWall.middle, rz, "left")}
+          {this.renderTopAndBottomWalls(i => i.leftWall, lz, "left")}
+          {this.renderTopAndBottomWalls(i => i.rightWall, rz, "right")}
           {frames ? (
             <AnimatedTexture
-              frames={frames.map(i => i.floor)}  
-              delay={delay} 
-              className="textures floor" 
+              frames={frames.map(i => i.floor)}
+              delay={delay}
+              className="textures floor"
             />
-          ) : null}          
+          ) : null}
         </div>
       </div>
     );

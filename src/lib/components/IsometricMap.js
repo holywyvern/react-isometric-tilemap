@@ -5,6 +5,7 @@ import MiniSignal from "mini-signals";
 import raf from "raf";
 
 import "./IsometricMap.scss";
+import IsometricMapEvent from "./IsometricMapEvent";
 
 class IsometricMap extends Component {
   static propTypes = {
@@ -20,8 +21,11 @@ class IsometricMap extends Component {
       right: PropTypes.number.isRequired
     }).isRequired,
     offsetY: PropTypes.number,
+    onMouseAction: PropTypes.func,
     onMouseDown: PropTypes.func,
-    onMouseUp: PropTypes.func
+    onMouseUp: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func
   };
 
   static defaultProps = {
@@ -62,21 +66,55 @@ class IsometricMap extends Component {
     this.__lastUpdate = now;
   };
 
-  onMouseDown = event => {
-    if (event.button === 0) {
-      const { onMouseDown } = this.props;
+  onMouseDown = e => {
+    if (e.button === 0) {
+      const { onMouseDown, onMouseAction } = this.props;
+      const event = new IsometricMapEvent(this, -1, -1, "down", "map");
+      if (typeof onMouseAction === "function") {
+        onMouseAction(event);
+      }
       if (typeof onMouseDown === "function") {
-        onMouseDown();
+        onMouseDown(event);
       }
     }
   };
 
-  onMouseUp = event => {
-    if (event.button === 0) {
-      const { onMouseUp } = this.props;
+  onMouseUp = e => {
+    if (e.button === 0) {
+      const { onMouseUp, onMouseAction } = this.props;
+      const event = new IsometricMapEvent(this, -1, -1, "up", "map");
+      if (typeof onMouseAction === "function") {
+        onMouseAction(event);
+      }
       if (typeof onMouseUp === "function") {
-        onMouseUp();
-      }      
+        onMouseUp(event);
+      }
+    }
+  };
+
+  onMouseEnter = e => {
+    if (e.button === 0) {
+      const { onMouseEnter, onMouseAction } = this.props;
+      const event = new IsometricMapEvent(this, -1, -1, "enter", "map");
+      if (typeof onMouseAction === "function") {
+        onMouseAction(event);
+      }
+      if (typeof onMouseEnter === "function") {
+        onMouseEnter(event);
+      }
+    }
+  };
+
+  onMouseLeave = e => {
+    if (e.button === 0) {
+      const { onMouseLeave, onMouseAction } = this.props;
+      const event = new IsometricMapEvent(this, -1, -1, "leave", "map");
+      if (typeof onMouseAction === "function") {
+        onMouseAction(event);
+      }
+      if (typeof onMouseLeave === "function") {
+        onMouseLeave(event);
+      }
     }
   };
 
@@ -105,7 +143,14 @@ class IsometricMap extends Component {
       "--map-offset-y": offsetY
     };
     return (
-      <div className="react-isometric-map-wrapper" style={vars} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+      <div
+        className="react-isometric-map-wrapper"
+        style={vars}
+        onMouseDown={this.onMouseDown}
+        onMouseUp={this.onMouseUp}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+      >
         <div className="react-isometric-map">{children}</div>
       </div>
     );

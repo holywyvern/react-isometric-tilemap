@@ -13,7 +13,7 @@ const textures1 = {
     top: "./right-top.png",
     bottom: "./right-bottom.png",
     middle: "./right-middle.png"
-  }  
+  }
 };
 
 const textures2 = {
@@ -27,7 +27,7 @@ const textures2 = {
     top: "./right-top.png",
     bottom: "./right-bottom.png",
     middle: "./right-middle.png"
-  }  
+  }
 };
 
 const App = () => (
@@ -38,10 +38,32 @@ const App = () => (
     slabSize={12}
     margin={{ top: 12, left: 12, right: 12, bottom: 12 }}
     offsetY={100}
+    onMouseAction={console.log}
   >
-    <IsometricTile x={0} y={0} z={3} frames={[textures1]} delay={0} onClick={console.log}/>
-    <IsometricTile x={1} y={1} z={1} frames={[textures1, textures2]} delay={200} onClick={console.log}/>
-    <IsometricObject x={1} y={1} z={1} width={85} height={186}  frames={["./tree.png"]}  />
+    <IsometricTile
+      x={0}
+      y={0}
+      z={3}
+      frames={[textures1]}
+      delay={0}
+      onMouseAction={console.log}
+    />
+    <IsometricTile
+      x={1}
+      y={1}
+      z={1}
+      frames={[textures1, textures2]}
+      delay={200}
+      onMouseAction={console.log}
+    />
+    <IsometricObject
+      x={1}
+      y={1}
+      z={1}
+      width={85}
+      height={186}
+      frames={["./tree.png"]}
+    />
   </IsometricMap>
 );
 
