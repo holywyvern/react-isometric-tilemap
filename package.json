@@ -1,14 +1,20 @@
 {
   "name": "react-isometric-tilemap",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A Tileset for isomtric game components made only with the DOM",
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
+  "pre-commit": [
+    "build",
+    "styleguide:build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/holywyvern/react-isometric-tilemap.git"
@@ -52,11 +58,13 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
+    "pre-commit": "^1.2.2",
     "promise": "8.0.1",
     "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.2.0",
+    "react-styleguidist": "^6.2.5",
     "sass-loader": "^6.0.6",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",

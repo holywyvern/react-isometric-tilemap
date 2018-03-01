@@ -7,38 +7,69 @@ import IsometricMapEvent from "../events/IsometricMapEvent";
 
 import "./IsometricTile.scss";
 
+/**
+ * A tile is a square on the map. It is composed of a floor and optionally
+ * a right and a left walls.
+ * The tiles are the floor of your map, so it can be grass, dirt or water, for example.
+ *
+ * @version 1.0.0
+ * @since 2.0.0
+ * @author [Ramiro Rojo](https://github.com/holywyvern)
+ */
 class IsometricTile extends Component {
   static propTypes = {
+    /** The x position of the tile, from 0 to width - 1 */
     x: PropTypes.number.isRequired,
+    /** The y position of the tile, from 0 to height - 1 */
     y: PropTypes.number.isRequired,
+    /** The height of the tile, it will be "lifted" as map slab size * z */
     z: PropTypes.number,
+    /** The height of the left wall, by default it is the same as the z value */
     leftZ: PropTypes.oneOf([PropTypes.number, null]),
+    /* The height of the right wall, by default it is the same as the z value */
     rightZ: PropTypes.oneOf([PropTypes.number, null]),
+    /** A list of frames for each part of the tile */
     frames: PropTypes.arrayOf(
       PropTypes.shape({
+        /** The floor texture name */
         floor: PropTypes.string.isRequired,
+        /** The left wall textures */
         leftWall: PropTypes.shape({
+          /** The top part of the wall */
           top: PropTypes.string.isRequired,
+          /** The middle part of the texture (repeats vertically) */
           middle: PropTypes.string.isRequired,
+          /** The bottom part of the texture */
           bottom: PropTypes.string.isRequired
         }).isRequired,
+        /** The right wall textures */
         rightWall: PropTypes.shape({
+          /** The top part of the wall */
           top: PropTypes.string.isRequired,
+          /** The middle part of the texture (repeats vertically) */
           middle: PropTypes.string.isRequired,
+          /** The bottom part of the texture */
           bottom: PropTypes.string.isRequired
         }).isRequired
       })
     ),
+    /** An intervall in milliseconds on wich each frame changes */
     delay: PropTypes.number,
+    /** Extra css classes added into the object */
     className: PropTypes.string,
+    /** An style object of CSS propertyes */
     style: PropTypes.object,
-    // Catch all events
+    /** Event used to catch all mouse events */
     onMouseAction: PropTypes.func,
-    // Click Events
+    /** Click event for the entire tile */
     onClick: PropTypes.func,
+    /** Click event for only the floor */
     onFloorClick: PropTypes.func,
+    /** Click event for any wall */
     onWallClick: PropTypes.func,
+    /** Click event for left wall */
     onLeftWallClick: PropTypes.func,
+    /** Click event for right wall */
     onRigthWallClick: PropTypes.func,
     // Mouse enter events
     onEnter: PropTypes.func,

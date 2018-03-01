@@ -7,30 +7,65 @@ import raf from "raf";
 import "./IsometricMap.scss";
 import IsometricMapEvent from "../events/IsometricMapEvent";
 
+/**
+ * An isometric map is a container for isometric objects and isometric tiles.
+ * It provides basic functionallity
+ *
+ * @version 1.0.0
+ * @since 2.0.0
+ * @author [Ramiro Rojo](https://github.com/holywyvern)
+ */
 class IsometricMap extends Component {
   static propTypes = {
+    /** The width of the map, in tiles */
     mapWidth: PropTypes.number.isRequired,
+    /** The height of the map, in tiles */
     mapHeight: PropTypes.number.isRequired,
+    /**
+     * The size of the tile. It represents the width of the horizontal diagonal
+     * and double the size of the vertical diagonal */
     tileSize: PropTypes.number.isRequired,
+    /** The size of a tile lifting per it's z height */
     slabSize: PropTypes.number.isRequired,
+    /** A CSS unit for dimensions, usually 1px */
     sizeUnit: PropTypes.string,
+    /**
+     * The margin of the tile, this margins are extra space drawed by the tiles than you
+     * can use to apply some details into the tile, and make maps look less squared
+     */
     margin: PropTypes.shape({
+      /** The top margin, used by the floor */
       top: PropTypes.number.isRequired,
+      /** The bottom margin, used by the floor and the bottom part of the wall  */
       bottom: PropTypes.number.isRequired,
+      /** The left margin, used by everything */
       left: PropTypes.number.isRequired,
+      /** The right margin, used by everything */
       right: PropTypes.number.isRequired
-    }).isRequired,
+    }),
+    /** An offset to move the map down, usefull to show the height properly */
     offsetY: PropTypes.number,
+    /** Callback for users interacting with the map */
     onMouseAction: PropTypes.func,
+    /** Callback called when you press the mouse down */
     onMouseDown: PropTypes.func,
+    /** Callback called when you press the mouse up */
     onMouseUp: PropTypes.func,
+    /** Callback called when the mouse enters the map */
     onMouseEnter: PropTypes.func,
+    /** Callback called when the mouse exists the map */
     onMouseLeave: PropTypes.func
   };
 
   static defaultProps = {
     sizeUnit: "1px",
-    offsetY: 0
+    offsetY: 0,
+    margin: {
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
+    }
   };
 
   static childContextTypes = {

@@ -1,64 +1,32 @@
-# React NPM library starter kit
+# React Isometric Tilemap
 
-[![Build Status](https://travis-ci.org/DimitriMikadze/create-react-library.svg?branch=master)](https://travis-ci.org/DimitriMikadze/create-react-library)
-[![Dependencies](https://img.shields.io/david/DimitriMikadze/create-react-library.svg)]()
-[![Dev Dependencies](https://img.shields.io/david/dev/DimitriMikadze/create-react-library.svg)]()
+A library for displaying tilemaps and handling events on it.
 
-based on Facebook's <a href="https://github.com/facebookincubator/create-react-app" target="_blank">Create react app</a>.
-We are constantly updating repository with the updates of `create-react-app`, so we have all new features and bug fixes of it.
+## How to use
 
-## Converted to custom setup
+### Install the library:
 
-Moved all dependencies to dev dependencies because we don't need extra dependencies for our library after build, but we want all this features while developing: 
+```sh
+npm i --save react-isometric-tilemap
+```
 
-* React, JSX, ES6, and Flow syntax support.
-* Language extras beyond ES6 like the object spread operator.
-* A dev server that lints for common errors.
-* Import CSS and image files directly from JavaScript.
-* Autoprefixed CSS, so you don’t need `-webkit` or other prefixes.
-* A `build` script to bundle JS, CSS, and images for production.
+Import this library in your code:
 
-## Getting Started
+```js
+// The map is the basic container, the tile is each square
+import IsometricMap, { IsometricTile } from "react-isometric-tilemap";
+// The styles are needed to display properly
+import "react-isometric-tilemap/build/css/index.css";
+```
 
-Clone repo
+Now you can create your own map with it:
 
-````
-git clone https://github.com/DimitriMikadze/create-react-library.git
-````
+```jsx
+const MyMap = () => {
+  <IsometricMap mapWidth={1} mapHeight={1} tileSize={32} slabSize={8}>
+    <IsometricTile x={0} y={0} z={3} />
+  </IsometricMap>;
+};
+```
 
-Install dependencies
-
-`npm install` or `yarn install`
-
-Start development server
-
-`npm start` or `yarn start`
-
-Runs the demo app in development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## Library files
-
-All library files are located inside `src/lib`  
-
-## Demo app
-
-Is located inside `src/demo` directory, here you can test your library while developing
-
-## Testing
-
-`npm run test` or `yarn run test`
-
-## Build library
-
-`npm run build` or `yarn run build`
-
-Produces production version of library under the `build` folder.
-
-## Publish library
-
-`npm publish`
-
-## Example library built with this starter kit
-
-https://github.com/DimitriMikadze/react-under-construction
+Please refer for the documentation for more details about the components provided.
