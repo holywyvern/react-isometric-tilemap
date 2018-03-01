@@ -5,7 +5,7 @@ import MiniSignal from "mini-signals";
 import raf from "raf";
 
 import "./IsometricMap.scss";
-import IsometricMapEvent from "./IsometricMapEvent";
+import IsometricMapEvent from "../events/IsometricMapEvent";
 
 class IsometricMap extends Component {
   static propTypes = {

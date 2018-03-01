@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import AnimatedTexture from "./AnimatedTexture";
 
-import IsometricMapEvent from "./IsometricMapEvent";
+import IsometricMapEvent from "../events/IsometricMapEvent";
 
 import "./IsometricObject.scss";
 
