@@ -215,7 +215,7 @@ module.exports = {
                 }
               },
               {
-                loader: "sass-loader"
+                loader: require.resolve("sass-loader")
               }
             ]
           },
