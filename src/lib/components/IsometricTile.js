@@ -13,7 +13,7 @@ import "./IsometricTile.scss";
  * The tiles are the floor of your map, so it can be grass, dirt or water, for example.
  *
  * @version 1.0.0
- * @since 2.0.0
+ * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 class IsometricTile extends Component {
@@ -71,17 +71,25 @@ class IsometricTile extends Component {
     onLeftWallClick: PropTypes.func,
     /** Click event for right wall */
     onRigthWallClick: PropTypes.func,
-    // Mouse enter events
+    /** Callback called when the mouse enters any part of the tile */
     onEnter: PropTypes.func,
+    /** Callback called when the mouse enters the floor of the tile */
     onFloorEnter: PropTypes.func,
+    /** Callback called when the mouse enters any wall of the tile */
     onWallEnter: PropTypes.func,
+    /** Callback called when the mouse enters the left wall of the tile */
     onLeftWallEnter: PropTypes.func,
+    /** Callback called when the mouse enters the right of the tile */
     onRigthWallEnter: PropTypes.func,
-    // Mouse exit events
+    /** Callback called when the mouse exits any part of the tile */
     onLeave: PropTypes.func,
+    /** Callback called when the mouse exits the floor of the tile */
     onFloorLeave: PropTypes.func,
+    /** Callback called when the mouse exits any wall of the tile */
     onWallLeave: PropTypes.func,
+    /** Callback called when the mouse exits the left wall of the tile */
     onLeftWallLeave: PropTypes.func,
+    /** Callback called when the mouse exits the right of the tile */
     onRigthWallLeave: PropTypes.func
   };
 

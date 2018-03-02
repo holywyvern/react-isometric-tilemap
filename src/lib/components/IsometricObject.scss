@@ -1,34 +1,37 @@
 .react-isometric-object-wrapper {
+  opacity: 0.5;
+  pointer-events: none;
   --p-z: var(--z, 0);
-  --p-elevation: calc(var(--z) * var(--p-slab-size) * var(--p-size-unit) * var(--p-ratio));
-  --p-margin: calc(-1 * var(--p-size-unit) * var(--p-margin-bottom) * var(--p-ratio));
+  --p-elevation: calc(
+    var(--z) * var(--p-slab-size) * var(--p-size-unit) * var(--p-ratio)
+  );
+  --p-margin: calc(
+    -1 * var(--p-size-unit) * var(--p-margin-bottom) * var(--p-ratio)
+  );
   position: relative;
   grid-column: calc(1 + var(--x));
   grid-row: calc(1 + var(--y));
   width: calc(var(--p-size-unit) * var(--p-tile-size));
   height: calc(var(--p-size-unit) * var(--p-tile-size));
-  z-index: calc( (var(--x) + var(--y) * var(--p-tile-size)) / 2 + 6);
+  z-index: calc((var(--x) + var(--y) * var(--p-tile-size)) / 2 + 6);
   transform: rotateZ(-45deg) scale(var(--p-ratio));
+  &.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
 }
 
 .react-isometric-object {
-  pointer-events: none;
-  opacity: 0.5;
   position: absolute;
   left: calc(
     var(--p-size-unit) *
-      (
-        var(--p-tile-size) - var(--object-width) / var(--p-ratio)
-      ) / 2
+      (var(--p-tile-size) - var(--object-width) / var(--p-ratio)) / 2
   );
   --p-bottom: calc(var(--p-margin) + var(--p-elevation));
   bottom: var(--p-bottom);
   width: calc(var(--p-size-unit) * var(--object-width) / var(--p-ratio));
   height: calc(var(--p-size-unit) * var(--object-height) * 2 / var(--p-ratio));
-  &.active {
-    pointer-events: auto;
-    opacity: 1;
-  }
+
   img {
     pointer-events: none;
     width: 100%;

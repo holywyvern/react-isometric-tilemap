@@ -12,7 +12,7 @@ import IsometricMapEvent from "../events/IsometricMapEvent";
  * It provides basic functionallity
  *
  * @version 1.0.0
- * @since 2.0.0
+ * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 class IsometricMap extends Component {
@@ -69,6 +69,9 @@ class IsometricMap extends Component {
   };
 
   static childContextTypes = {
+    /** The ticker is an object than can handle events on frame update.
+     * It calls when a new frame is triggered with request animation frame
+     */
     ticker: PropTypes.object
   };
 

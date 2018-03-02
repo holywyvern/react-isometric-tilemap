@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  * It's similar to a gif, but it's using a set of frames as different images.
  *
  * @version 1.0.0
- * @since 2.0.0
+ * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 class AnimatedTexture extends Component {

@@ -14,7 +14,7 @@ import "./IsometricObject.scss";
  * or buildings.
  *
  * @version 1.0.0
- * @since 2.0.0
+ * @since 1.0.0
  * @author [Ramiro Rojo](https://github.com/holywyvern)
  */
 class IsometricObject extends Component {
@@ -115,14 +115,14 @@ class IsometricObject extends Component {
       "--object-width": width,
       "--object-height": height
     };
-    const classes = ["react-isometric-object"];
+    const classes = ["react-isometric-object-wrapper"];
     if (className) classes.push(className);
     if (active) {
       classes.push("active");
     }
     return (
-      <div className="react-isometric-object-wrapper" style={vars}>
-        <div className={classes.join(" ")} onClick={this.onClick}>
+      <div className={classes.join(" ")} style={vars}>
+        <div className="react-isometric-object" onClick={this.onClick}>
           {frames ? <AnimatedTexture frames={frames} delay={delay} /> : null}
         </div>
       </div>
