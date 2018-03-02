@@ -10,9 +10,10 @@
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "build:all": "npm run build && npm run demo && npm run styleguide:build"
   },
-  "pre-commit": ["demo", "build", "styleguide:build"],
+  "pre-commit": ["build:all"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/holywyvern/react-isometric-tilemap.git"

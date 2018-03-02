@@ -5,16 +5,16 @@ import { IsometricMap, IsometricTile, IsometricObject } from "../lib";
 import "./App.scss";
 
 const textures1 = {
-  floor: "./floor.png",
+  floor: require("./floor.png"),
   leftWall: {
-    top: "./left-top.png",
-    bottom: "./left-bottom.png",
-    middle: "./left-middle.png"
+    top: require("./left-top.png"),
+    bottom: require("./left-bottom.png"),
+    middle: require("./left-middle.png")
   },
   rightWall: {
-    top: "./right-top.png",
-    bottom: "./right-bottom.png",
-    middle: "./right-middle.png"
+    top: require("./right-top.png"),
+    bottom: require("./right-bottom.png"),
+    middle: require("./right-middle.png")
   }
 };
 
