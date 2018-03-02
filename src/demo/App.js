@@ -176,7 +176,7 @@ const App = () => (
                 z={z}
                 width={85}
                 height={186}
-                frames={["./tree.png"]}
+                frames={[require("./tree.png")]}
                 active
               />
             );

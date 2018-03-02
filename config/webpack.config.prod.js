@@ -123,7 +123,7 @@ module.exports = {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve("url-loader"),
             options: {
-              limit: Number.MAX_SAFE_INTEGER,
+              limit: 10000,
               name: "media/[name].[ext]"
             }
           },
@@ -163,9 +163,9 @@ module.exports = {
                     {
                       loader: require.resolve("css-loader"),
                       options: {
-                        importLoaders: 1,
-                        minimize: true,
-                        sourceMap: shouldUseSourceMap
+                        importLoaders: 1
+                        //minimize: true,
+                        //sourceMap: shouldUseSourceMap
                       }
                     },
                     {
@@ -211,9 +211,9 @@ module.exports = {
                     {
                       loader: require.resolve("css-loader"),
                       options: {
-                        importLoaders: 1,
-                        minimize: true,
-                        sourceMap: shouldUseSourceMap
+                        importLoaders: 1
+                        //minimize: true,
+                        //sourceMap: shouldUseSourceMap
                       }
                     },
                     {

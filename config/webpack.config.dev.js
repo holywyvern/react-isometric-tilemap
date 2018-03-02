@@ -130,8 +130,8 @@ module.exports = {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve("url-loader"),
             options: {
-              limit: Number.MAX_SAFE_INTEGER,
-              name: "static/media/[name].[hash:8].[ext]"
+              limit: 10000,
+              name: "media/[name].[ext]"
             }
           },
           // Process JS with Babel.

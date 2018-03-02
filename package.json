@@ -1,8 +1,7 @@
 {
   "name": "react-isometric-tilemap",
   "version": "1.0.0",
-  "description":
-    "A Tileset for isomtric game components made only with the DOM",
+  "description": "A Tileset for isomtric game components made only with the DOM",
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
@@ -13,7 +12,9 @@
     "styleguide:build": "styleguidist build",
     "build:all": "npm run build && npm run demo && npm run styleguide:build"
   },
-  "pre-commit": ["build:all"],
+  "pre-commit": [
+    "build:all"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/holywyvern/react-isometric-tilemap.git"
@@ -49,7 +50,7 @@
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.4.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.5",
+    "file-loader": "^1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
@@ -78,8 +79,12 @@
     "react-dom": ">=0.14"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -89,10 +94,11 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -107,7 +113,9 @@
     ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
