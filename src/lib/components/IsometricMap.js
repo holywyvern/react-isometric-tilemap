@@ -171,7 +171,7 @@ class IsometricMap extends Component {
       "--map-width": mapWidth,
       "--map-height": mapHeight,
       "--tile-size": tileSize,
-      "--slab-suze": slabSize,
+      "--slab-size": slabSize,
       "--size-unit": sizeUnit,
       "--margin-top": margin.top,
       "--margin-bottom": margin.bottom,
